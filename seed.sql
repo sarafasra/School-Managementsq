@@ -15,3 +15,4 @@ VALUES ('2020-04-02','STUD01',1,1);
 INSERT INTO enrollments (enrolled_at,status,student_id,course_id)
 VALUES ('2025-03-03','actif',1,2),
 ('2025-08-05','actif',1,1);
+SELECT * from users;
