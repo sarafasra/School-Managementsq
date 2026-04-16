@@ -10,3 +10,5 @@ VALUES('développement stack','A1'),
 INSERT INTO courses (title,description,total_hours,users_id)
 VALUES('java','introduction au web',30,3),
 ('php','php avancer',40,2);
+INSERT INTO students (dateofbirth,student_number,user_id,class_id)
+VALUES ('2020-04-02','STUD01',1,1);
