@@ -13,3 +13,11 @@ Foreign Key (role_id) REFERENCES roles (id)
 CREATE table classes (id INT PRIMARY KEY AUTO_INCREMENT ,
 name VARCHAR (50),
 classroom_number INT  NOT NULL );
+CREATE TABLE courses (
+  id int PRIMARY KEY AUTO_INCREMENT,
+  title varchar (100) NOT NULL,
+  description varchar (100) NOT NULL,
+  total_hours int NOT NULL,
+  users_id int NOT NULL,
+  FOREIGN KEY (users_id) REFERENCES users(id)
+);
