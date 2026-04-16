@@ -21,3 +21,12 @@ CREATE TABLE courses (
   users_id int NOT NULL,
   FOREIGN KEY (users_id) REFERENCES users(id)
 );
+CREATE TABLE students (
+  id int PRIMARY key AUTO_INCREMENT,
+  dateofbirth date NOT NULL,
+  student_number int NOT NULL,
+  user_id int NOT NULL,
+  class_id int NOT NULL,
+  FOREIGN KEY (class_id) REFERENCES classes(id),
+  FOREIGN KEY (user_id)REFERENCES users(id)
+);
