@@ -30,3 +30,13 @@ CREATE TABLE students (
   FOREIGN KEY (class_id) REFERENCES classes(id),
   FOREIGN KEY (user_id)REFERENCES users(id)
 );
+
+CREATE TABLE enrollments (
+  id int PRIMARY KEY AUTO_INCREMENT,
+  enrolled_at date NOT NULL,
+  status  varchar (50) NOT NULL,
+  student_id int NOT NULL,
+  course_id int NOT NULL,
+  FOREIGN KEY (course_id) REFERENCES courses(id),
+  FOREIGN KEY (student_id) REFERENCES students(id)
+);
