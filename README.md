@@ -53,3 +53,6 @@ Une organisation claire des données
 L’absence de redondance
 Une évolutivité facile
 Des relations logiques et cohérentes pour un système scolaire.
+
+diagramme ERD : 
+![alt text](image.png)
