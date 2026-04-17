@@ -2,41 +2,60 @@ use  edusync;
 CREATE table roles (id int PRIMARY KEY AUTO_INCREMENT ,
 label VARCHAR (50) NOT NULL
 );
-CREATE table  users (id INT PRIMARY key AUTO_INCREMENT ,
-firstname VARCHAR (50) NOT NULL ,
-lastname VARCHAR (50) NOT NULL ,
-email VARCHAR (100) NOT NULL UNIQUE ,
-password VARCHAR (255) NOT NULL ,
-role_id INT NOT NULL , 
-Foreign Key (role_id) REFERENCES roles (id)
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    firstname VARCHAR(50) NOT NULL,
+    lastname VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role_id INT NOT NULL,
+    CONSTRAINT fk_users_role
+        FOREIGN KEY (role_id)
+        REFERENCES roles(id)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
 );
-CREATE table classes (id INT PRIMARY KEY AUTO_INCREMENT ,
-name VARCHAR (50),
-classroom_number INT  NOT NULL );
+CREATE TABLE classes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    classroom_number VARCHAR(20) NOT NULL
+);
 CREATE TABLE courses (
-  id int PRIMARY KEY AUTO_INCREMENT,
-  title varchar (100) NOT NULL,
-  description varchar (100) NOT NULL,
-  total_hours int NOT NULL,
-  users_id int NOT NULL,
-  FOREIGN KEY (users_id) REFERENCES users(id)
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(100) NOT NULL,
+    description TEXT,
+    total_hours INT NOT NULL,
+    users_id INT NOT NULL,
+        FOREIGN KEY (users_id)REFERENCES users(id)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
 );
+
+
 CREATE TABLE students (
-  id int PRIMARY key AUTO_INCREMENT,
-  dateofbirth date NOT NULL,
-  student_number int NOT NULL,
-  user_id int NOT NULL,
-  class_id int NOT NULL,
-  FOREIGN KEY (class_id) REFERENCES classes(id),
-  FOREIGN KEY (user_id)REFERENCES users(id)
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    dateofbirth DATE NOT NULL,
+    student_number VARCHAR(50) NOT NULL UNIQUE,
+    user_id INT NOT NULL UNIQUE,
+    class_id INT NOT NULL,
+        FOREIGN KEY (user_id)REFERENCES users(id),
+        FOREIGN KEY (class_id)REFERENCES classes(id)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE enrollments (
-  id int PRIMARY KEY AUTO_INCREMENT,
-  enrolled_at date NOT NULL,
-  status  varchar (50) NOT NULL,
-  student_id int NOT NULL,
-  course_id int NOT NULL,
-  FOREIGN KEY (course_id) REFERENCES courses(id),
-  FOREIGN KEY (student_id) REFERENCES students(id)
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    enrolled_at DATE NOT NULL,
+    status ENUM('Actif','Terminé') NOT NULL,
+    student_id INT NOT NULL,
+    course_id INT NOT NULL,
+        FOREIGN KEY (student_id)REFERENCES students(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+        FOREIGN KEY (course_id)REFERENCES courses(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+  
 );
